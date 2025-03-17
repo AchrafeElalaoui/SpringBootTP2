@@ -79,3 +79,28 @@ public class SpringBootTp2Application implements CommandLineRunner {
 }
 ````
 ## H2 Database:
+- Add the following properties to the application.properties file:
+````properties
+server.port=8086
+spring.datasource.url=jdbc:h2:mem:patients-db
+spring.h2.console.enabled=true
+````
+To access your H2 database, enter http://localhost:8086/h2-console in your browser, enter the correct JDBC URL, and then click Connect
+## Migration from H2 Database to MySQL Database:
+- Add the following properties to the application.properties file:
+````properties
+spring.datasource.url=jdbc:mysql://localhost:3306/patientdb?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+````
+- Add the following dependency to the pom.xml file:
+````xml
+<dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <scope>runtime</scope>
+</dependency>
+````
